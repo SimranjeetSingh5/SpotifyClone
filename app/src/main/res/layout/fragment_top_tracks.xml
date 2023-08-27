@@ -5,11 +5,11 @@
     android:background="@android:color/transparent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/blank"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/topTracksRv"
+        android:background="@android:color/transparent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fontFamily="@font/roboto"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

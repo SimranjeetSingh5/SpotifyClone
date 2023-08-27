@@ -4,8 +4,13 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/faded_black_background"
+    android:background="@color/black"
     android:fitsSystemWindows="true">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/faded_black_background"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -17,24 +22,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tabLayout"/>
 
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:backgroundTint="@android:color/transparent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         app:tabIconTint="#7E7E7E"
         app:tabGravity="center"
         app:tabTextAppearance="@style/TabFont"
         android:paddingBottom="20dp"
         app:tabSelectedTextColor="@color/white"
         app:tabTextColor="#7E7E7E"
-        app:tabIndicatorHeight="10dp"
         app:tabIndicatorGravity="bottom"
         app:tabIndicator="@drawable/songs_tab_selector"
-        app:layout_constraintTop_toBottomOf="@id/viewPager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <TextView
+        android:id="@+id/noInternetTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/please_check_your_internet_connection"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

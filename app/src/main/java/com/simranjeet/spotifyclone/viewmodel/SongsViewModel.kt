@@ -12,8 +12,8 @@ import retrofit2.Response
 
 class SongsViewModel(private val songsRepository: SongsRepository) : ViewModel() {
 
-    val songsMutableLiveData: MutableLiveData<Resource<Songs?>?> = MutableLiveData()
-    var songsResponse: Songs? = null
+    val songsMutableLiveData: MutableLiveData<Resource<Songs>> = MutableLiveData()
+    private var songsResponse: Songs? = null
     fun getSongs() =
         viewModelScope.launch {
             val response = songsRepository.getSongs()
@@ -21,11 +21,12 @@ class SongsViewModel(private val songsRepository: SongsRepository) : ViewModel()
 
         }
 
-    private fun handleSongsResponse(response: Response<Songs>?): Resource<Songs?> {
+    private fun handleSongsResponse(response: Response<Songs>?): Resource<Songs> {
         if (response?.isSuccessful == true) {
-            response.body()?.let { resultResponse ->
+            response.body().let { resultResponse ->
                 songsResponse = resultResponse
-                return Resource.Success(songsResponse ?: resultResponse)
+                return Resource.Success(songsResponse!!)
+
             }
         }
         return Resource.Error(response?.message() ?: "Something went wrong!!")
