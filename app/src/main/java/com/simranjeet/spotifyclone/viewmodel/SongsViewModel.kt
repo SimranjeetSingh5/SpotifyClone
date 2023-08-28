@@ -3,6 +3,7 @@ package com.simranjeet.spotifyclone.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.simranjeet.spotifyclone.models.SongItem
 import com.simranjeet.spotifyclone.models.Songs
 import com.simranjeet.spotifyclone.repository.SongsRepository
 import com.simranjeet.spotifyclone.utils.Resource
@@ -13,6 +14,7 @@ import retrofit2.Response
 class SongsViewModel(private val songsRepository: SongsRepository) : ViewModel() {
 
     val songsMutableLiveData: MutableLiveData<Resource<Songs>> = MutableLiveData()
+    val currentSong:MutableLiveData<SongItem> = MutableLiveData()
     private var songsResponse: Songs? = null
     fun getSongs() =
         viewModelScope.launch {

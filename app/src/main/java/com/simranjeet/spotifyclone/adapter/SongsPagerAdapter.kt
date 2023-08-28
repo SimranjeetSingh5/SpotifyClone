@@ -1,27 +1,47 @@
 package com.simranjeet.spotifyclone.adapter
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.simranjeet.spotifyclone.fragments.ForYouFragment
-import com.simranjeet.spotifyclone.fragments.TopTracksFragment
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.simranjeet.spotifyclone.R
+import com.simranjeet.spotifyclone.databinding.CoverSliderItemBinding
+import com.simranjeet.spotifyclone.models.SongItem
+import com.simranjeet.spotifyclone.utils.Constants
 
-private const val NUM_TABS = 2
+class SongsPagerAdapter(var imageUrlList: List<SongItem>) :
+    RecyclerView.Adapter<SongsPagerAdapter.ViewPagerViewHolder>() {
 
-class SongsPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
-    FragmentStateAdapter(fragmentManager, lifecycle) {
-    override fun getItemCount(): Int {
-        return NUM_TABS
-    }
+    inner class ViewPagerViewHolder(private val binding: CoverSliderItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-    override fun createFragment(position: Int): Fragment {
-        when (position) {
-            0 -> return ForYouFragment()
-            1 -> return TopTracksFragment()
+        fun setData(imageUrl: String) {
 
+            Glide.with(binding.root.context)
+                .load(Constants.BASE_URL + Constants.GET_COVER + imageUrl)
+                .error(R.drawable.placeholder)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.coverImage)
         }
-        return ForYouFragment()
+
     }
 
+    override fun getItemCount(): Int = imageUrlList.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerViewHolder {
+
+        val binding = CoverSliderItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+
+        return ViewPagerViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
+
+        holder.setData(imageUrlList[position].cover!!)
+    }
 }

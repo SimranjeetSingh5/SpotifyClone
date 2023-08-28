@@ -37,7 +37,7 @@ class TopTracksAdapter(private var songs: List<SongItem>?, private val songsList
         with(holder) {
             with(songs?.get(position)) {
                 binding.root.setOnClickListener {
-                    songsListener.onSongClicked(songs!!.elementAt(position))
+                    songsListener.onSongClick(songs!!.elementAt(position))
                 }
                 binding.song.text = this?.name
                 binding.artist.text = this?.artist

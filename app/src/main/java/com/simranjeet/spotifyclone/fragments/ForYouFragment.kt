@@ -16,7 +16,7 @@ import com.simranjeet.spotifyclone.models.SongItem
 import com.simranjeet.spotifyclone.utils.Resource
 import com.simranjeet.spotifyclone.viewmodel.SongsViewModel
 
-class ForYouFragment : Fragment(),SongsListener {
+class ForYouFragment : Fragment(), SongsListener {
     private lateinit var binding: FragmentForYouBinding
     private lateinit var viewModel: SongsViewModel
     private lateinit var forYouAdapter: ForYouAdapter
@@ -31,7 +31,6 @@ class ForYouFragment : Fragment(),SongsListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        viewModel.getSongs()
         setupRecyclerView()
     }
     private fun setupRecyclerView(){
@@ -78,9 +77,9 @@ class ForYouFragment : Fragment(),SongsListener {
     }
 
 
-    override fun onSongClicked(songs: SongItem?) {
-        Toast.makeText(activity, "Clicked", Toast.LENGTH_LONG).show()
 
+    override fun onSongClick(song: SongItem) {
+        viewModel.currentSong.value = song
     }
 
 }

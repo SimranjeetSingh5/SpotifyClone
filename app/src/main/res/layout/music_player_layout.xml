@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/mainMusicCl"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/songCoverViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="?actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/song"/>
+
+    <TextView
+        android:id="@+id/song"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:layout_marginTop="20dp"
+        android:maxLines="1"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto"
+        android:text="Viva la vida"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@id/songCoverViewPager"
+        app:layout_constraintEnd_toEndOf="@id/songCoverViewPager"
+        app:layout_constraintTop_toBottomOf="@id/songCoverViewPager"
+        app:layout_constraintBottom_toTopOf="@id/artist"/>
+
+    <TextView
+        android:id="@+id/artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coldplay"
+        android:textColor="#7E7E7E"
+        android:textSize="14sp"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintTop_toBottomOf="@id/song"
+        app:layout_constraintStart_toStartOf="@id/songCoverViewPager"
+        app:layout_constraintEnd_toEndOf="@id/songCoverViewPager"/>
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:valueFrom="0.0"
+        app:tickColor = "@color/white"
+        app:tickColorActive = "@color/white"
+        app:tickColorInactive = "@color/grey"
+        app:haloColor = "@color/grey"
+        app:haloRadius="0dp"
+        app:thumbStrokeColor = "@color/green"
+        app:thumbRadius = "0dp"
+        android:valueTo="100.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/artist"
+        />
+    <TextView
+        android:id="@+id/currentDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2:34"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintTop_toBottomOf="@id/seekBar"
+        app:layout_constraintStart_toStartOf="@id/seekBar"/>
+    <TextView
+        android:id="@+id/totalDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4:20"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintTop_toBottomOf="@id/seekBar"
+        app:layout_constraintEnd_toEndOf="@id/seekBar"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/playPauseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/white"
+        android:hapticFeedbackEnabled="true"
+        android:src="@drawable/ic_play"
+        app:maxImageSize="46dp"
+        app:layout_constraintStart_toEndOf="@id/previous"
+        app:layout_constraintTop_toBottomOf="@id/seekBar"
+        app:layout_constraintEnd_toStartOf="@id/next"
+        android:contentDescription="@string/app_name" />
+
+    <ImageView
+        android:id="@+id/previous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/previous"
+        android:padding="10dp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/playPauseButton"
+        app:layout_constraintTop_toTopOf="@id/playPauseButton"
+        app:layout_constraintBottom_toBottomOf="@id/playPauseButton"
+        android:contentDescription="@string/app_name"
+        app:tint="@color/grey" />
+
+    <ImageView
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/nexticon"
+        android:padding="10dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintStart_toEndOf="@id/playPauseButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/playPauseButton"
+        app:layout_constraintBottom_toBottomOf="@id/playPauseButton"
+        app:riv_corner_radius="50dp"
+        app:tint="@color/grey" />
+</androidx.constraintlayout.widget.ConstraintLayout>

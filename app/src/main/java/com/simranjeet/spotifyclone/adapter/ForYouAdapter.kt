@@ -37,7 +37,7 @@ class ForYouAdapter(private var songs: List<SongItem>?, private val songsListene
             with(holder) {
                 with(songs?.get(position)) {
                         binding.root.setOnClickListener {
-                            songsListener.onSongClicked(songs!!.elementAt(position))
+                            songsListener.onSongClick(songs!!.elementAt(position))
                         }
                         binding.song.text = this?.name
                         binding.artist.text = this?.artist

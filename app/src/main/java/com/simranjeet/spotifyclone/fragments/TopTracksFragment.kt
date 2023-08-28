@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.simranjeet.spotifyclone.activities.MainActivity
-import com.simranjeet.spotifyclone.adapter.ForYouAdapter
 import com.simranjeet.spotifyclone.adapter.TopTracksAdapter
 import com.simranjeet.spotifyclone.databinding.FragmentTopTracksBinding
 import com.simranjeet.spotifyclone.listeners.SongsListener
@@ -17,7 +16,7 @@ import com.simranjeet.spotifyclone.models.SongItem
 import com.simranjeet.spotifyclone.utils.Resource
 import com.simranjeet.spotifyclone.viewmodel.SongsViewModel
 
-class TopTracksFragment : Fragment() ,SongsListener{
+class TopTracksFragment : Fragment() , SongsListener {
 
     private lateinit var binding: FragmentTopTracksBinding
     private lateinit var viewModel: SongsViewModel
@@ -70,8 +69,8 @@ class TopTracksFragment : Fragment() ,SongsListener{
 
     }
 
-    override fun onSongClicked(songs: SongItem?) {
-        TODO("Not yet implemented")
+    override fun onSongClick(song: SongItem) {
+        viewModel.currentSong.value = song
     }
 
 }
