@@ -10,8 +10,21 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/faded_black_background" />
+        android:src="@drawable/faded_black_background"
+        android:contentDescription="@string/app_name" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/green"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
@@ -26,7 +39,7 @@
             android:id="@+id/miniPlayerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/tabLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -51,17 +64,17 @@
             android:ellipsize="end"
             android:fontFamily="@font/roboto"
             android:maxLines="1"
-            android:text="Starboy"
+            android:text="@string/viva_la_vida"
             android:textColor="@color/white"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@id/coverImage"
             app:layout_constraintStart_toEndOf="@id/coverImage"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/playPauseButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/circle"
             android:paddingVertical="10dp"
@@ -76,14 +89,15 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="?actionBarSize"
         android:background="@android:color/transparent"
-        android:paddingBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tabGravity="center"
-        app:tabIconTint="#7E7E7E"
+        app:tabIconTint="@color/white"
+        app:tabIndicatorColor="@color/white"
         app:tabIndicator="@drawable/songs_tab_selector"
-        app:tabIndicatorGravity="bottom"
+        app:tabIndicatorHeight="5dp"
         app:tabSelectedTextColor="@color/white"
         app:tabTextAppearance="@style/TabFont"
         app:tabTextColor="#7E7E7E" />
@@ -96,6 +110,8 @@
         android:text="@string/please_check_your_internet_connection"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:visibility="gone"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.simranjeet.spotifyclone.activities.MainActivity
@@ -37,7 +36,6 @@ class ForYouFragment : Fragment(), SongsListener {
         viewModel.songsMutableLiveData.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Resource.Success -> {
-                    hideProgressBar()
                     response.data?.let { songsResponse ->
                         forYouAdapter = ForYouAdapter(songsResponse.songItemData?.filter { it.topTrack==false},this)
                         binding.forYouRv.apply {
@@ -50,30 +48,11 @@ class ForYouFragment : Fragment(), SongsListener {
                     }
                 }
 
-                is Resource.Error -> {
-                    hideProgressBar()
-                    response.message?.let { message ->
-                        Log.e("Error Response: ", message)
-                    }
-                }
-                is Resource.Loading ->{
-                    showProgressBar()
-                }
 
-                else -> {
-                    Toast.makeText(activity, "Something went wrong!!", Toast.LENGTH_LONG).show()
-                }
+                else -> {}
             }
 
         }
-
-    }
-    private fun hideProgressBar() {
-        binding.progressBar.visibility =View.INVISIBLE
-    }
-    private fun showProgressBar() {
-        binding.progressBar.visibility =View.VISIBLE
-
     }
 
 

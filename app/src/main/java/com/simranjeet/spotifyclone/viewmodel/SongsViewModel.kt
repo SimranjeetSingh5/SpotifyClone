@@ -15,9 +15,11 @@ class SongsViewModel(private val songsRepository: SongsRepository) : ViewModel()
 
     val songsMutableLiveData: MutableLiveData<Resource<Songs>> = MutableLiveData()
     val currentSong:MutableLiveData<SongItem> = MutableLiveData()
+    val isMusicPlaying:MutableLiveData<Boolean> = MutableLiveData()
     private var songsResponse: Songs? = null
     fun getSongs() =
         viewModelScope.launch {
+            songsMutableLiveData.postValue(Resource.Loading())
             val response = songsRepository.getSongs()
             songsMutableLiveData.postValue(handleSongsResponse(response))
 

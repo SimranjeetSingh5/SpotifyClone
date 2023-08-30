@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.simranjeet.spotifyclone.activities.MainActivity
@@ -52,17 +51,7 @@ class TopTracksFragment : Fragment() , SongsListener {
                     }
                 }
 
-                is Resource.Error -> {
-                    response.message?.let { message ->
-                        Log.e("Error Response: ", message)
-                    }
-                }
-                is Resource.Loading ->{
-                }
-
-                else -> {
-                    Toast.makeText(activity, "Something went wrong!!", Toast.LENGTH_LONG).show()
-                }
+                else -> {}
             }
 
         }

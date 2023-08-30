@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:innerRadius="0dp"
+    android:shape="ring"
+    android:thickness="4dp"
+    android:useLevel="false">
 
-    <item android:drawable="@drawable/selected_dot"
-        android:state_selected="true"/>
+    <size
+        android:width="2dp"
+        android:height="2dp" />
 
-</selector>
+    <solid android:color="@color/white" />
+</shape>
