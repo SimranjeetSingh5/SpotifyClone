@@ -12,7 +12,6 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
@@ -62,7 +61,6 @@ class MainActivity : AppCompatActivity() {
         .override(100, 100)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
 
-    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -166,7 +164,6 @@ class MainActivity : AppCompatActivity() {
         binding.playPauseButton.isEnabled = false
     }
 
-    @RequiresApi(Build.VERSION_CODES.R)
     private fun setupMusicPlayingObserver() {
         viewModel.isMusicPlaying.observe(this) {
             if (it == true) {
@@ -184,8 +181,10 @@ class MainActivity : AppCompatActivity() {
                         theme
                     )
                 )
-                mBottomSheetBinding.playPauseButton.performHapticFeedback(HapticFeedbackConstants.GESTURE_START)
-                binding.playPauseButton.performHapticFeedback(HapticFeedbackConstants.GESTURE_START)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    mBottomSheetBinding.playPauseButton.performHapticFeedback(HapticFeedbackConstants.GESTURE_START)
+                    binding.playPauseButton.performHapticFeedback(HapticFeedbackConstants.GESTURE_START)
+                }
                 mediaPlayer?.start()
                 enablePlayPause()
                 setupSeekbar()
@@ -197,18 +196,21 @@ class MainActivity : AppCompatActivity() {
                         theme
                     )
                 )
-                binding.playPauseButton.performHapticFeedback(
-                    HapticFeedbackConstants.GESTURE_END
-                )
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    binding.playPauseButton.performHapticFeedback(
+                        HapticFeedbackConstants.GESTURE_END
+                    )
+
+                    mBottomSheetBinding.playPauseButton.performHapticFeedback(
+                        HapticFeedbackConstants.GESTURE_END
+                    )
+                }
                 mBottomSheetBinding.playPauseButton.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         resources,
                         R.drawable.ic_play,
                         theme
                     )
-                )
-                mBottomSheetBinding.playPauseButton.performHapticFeedback(
-                    HapticFeedbackConstants.GESTURE_END
                 )
                 enablePlayPause()
                 mediaPlayer?.pause()
@@ -217,7 +219,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.R)
+
     private fun setUpOnClickListeners() {
         binding.miniPlayerLayout.setOnClickListener {
             mBottomSheetBinding.mainMusicCl.minHeight =
@@ -277,6 +279,15 @@ class MainActivity : AppCompatActivity() {
         mBottomSheetBinding.songCoverViewPager.offscreenPageLimit = 3
 
         mBottomSheetBinding.songCoverViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        val pageTranslationX =  5
+        val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
+            page.translationX = -pageTranslationX * position
+            // Next line scales the item's height. You can remove it if you don't want this effect
+            page.scaleY = 1 - (0.25f * kotlin.math.abs(position))
+            // If you want a fading effect uncomment the next line:
+            // page.alpha = 0.25f + (1 - abs(position))
+        }
+        mBottomSheetBinding.songCoverViewPager.setPageTransformer(pageTransformer)
 
         mBottomSheetBinding.songCoverViewPager.registerOnPageChangeCallback(
             object : ViewPager2.OnPageChangeCallback() {
